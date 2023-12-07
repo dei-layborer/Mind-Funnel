@@ -5,13 +5,14 @@ function buildDeck() {
     const c = document.getElementById('container');
     loadDefaultSize();
 
-    const n = 30 // number of cards in the deck
+    const n = 15 // number of cards in the deck
     const shuffledCards = shuffleCards(n);
-    const shuffledCardMatches = shuffleCards(n);
 
-    for (let i = 0; i < 30; i++) {
+    // each item in shuffled cards is a two-element array consisting of the content of the card and its match
 
-        const newCard = new Card(shuffledCards[i], shuffledCards[i], shuffledCardMatches[i]);
+    for (let i = 0; i < n; i++) {
+
+        const newCard = new Card(i, shuffledCards[i]);
         cardDeck.push(newCard);
         c.appendChild(newCard);
 
@@ -22,22 +23,22 @@ function buildDeck() {
 
 function shuffleCards(n) {
 
-    if (n % 2 != 0) {
-        console.error('Odd number of cards in deck');
-        return;
-    }
-    const outValues = [];
+    const cards = [];
+    
+    const dataEntries = Object.entries(frList);
 
     do {
 
         let c = getRandom(n);
-        if (!outValues.includes(c)) {
-            outValues.push(c);
+        let itemAt = dataEntries[c];
+
+        if (!cards.includes(itemAt)) {
+            cards.push(itemAt);
         }
 
-    } while (outValues.length < n)
+    } while (cards.length < n) 
 
-    return outValues;
+    return cards;
 
     function getRandom(maxVal) {
         return Math.floor(Math.random() * maxVal);

@@ -6,12 +6,12 @@ class Card extends HTMLElement {
     #matchId;   // id of the card that goes with this one
     #matched;   // whether this card has been matched with another or not
 
-    constructor(id, content, linkedId) {
+    constructor(id, content) {
         super();
 
         this.#id = id;
         this.#isFlipped = false;
-        this.#matchId = linkedId;
+        //this.#matchId = linkedId;
         this.#matched = false;
         
         const shadow = this.attachShadow({ mode: 'open' });
